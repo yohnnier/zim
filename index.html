@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colocación de PICC: Método ZIM y Tunelización | Campus Vygon</title>
+    <style>
+        /* ======================================== */
+        /* ESTILOS GLOBALES Y DE RESETEO */
+        /* ======================================== */
+        *, *::before, *::after { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background-color: #eef2f7; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+        .main-container { width: 92%; max-width: 1100px; margin: 25px auto; background-color: #ffffff; padding: 30px 40px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08); border-radius: 10px; flex-grow: 1; }
+        h1, h2 { color: #004085; text-align: center; margin-bottom: 25px; font-weight: 600; }
+        h2 { border-bottom: 3px solid #007bff; padding-bottom: 15px; font-size: 1.7em; }
+        h1 { font-size: 2.2em; }
+        p { margin-bottom: 20px; text-align: justify; hyphens: auto; }
+        a { color: #007bff; text-decoration: none; transition: color 0.2s ease-in-out; }
+        a:hover, a:focus { color: #0056b3; text-decoration: underline; }
+
+        /* ======================================== */
+        /* ACORDEONES (LISTAS INTERACTIVAS) */
+        /* ======================================== */
+        .accordion-item { margin-bottom: 20px; border: 1px solid #d0dceb; border-radius: 8px; overflow: hidden; background-color: #ffffff; }
+        .accordion-title { background-color: #e0e7f0; color: #004085; cursor: pointer; padding: 18px 25px; font-weight: 600; position: relative; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s ease; }
+        .accordion-title:hover { background-color: #d0dceb; }
+        .accordion-title::after { content: '\002B'; font-size: 1.4em; font-weight: 300; color: #007bff; transition: transform 0.3s ease; transform: rotate(0deg); }
+        .accordion-item.active .accordion-title::after { content: '\002D'; transform: rotate(0deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); padding: 0 25px; background-color: #f8f9fa; }
+        .accordion-content p, .accordion-content ul { padding-top: 15px; padding-bottom: 15px; }
+        .accordion-content ul { padding-left: 25px; margin-top: 0; list-style-type: disc; }
+        .accordion-content li { margin-bottom: 12px; }
+
+        /* ======================================== */
+        /* CUESTIONARIO INTERACTIVO */
+        /* ======================================== */
+        .quiz-section { margin-top: 40px; padding: 30px; background-color: #dceafa; border-radius: 8px; border: 1px solid #b3d7ff; }
+        .quiz-section h2 { border-bottom: none; margin-bottom: 25px; }
+        .quiz-question { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed #a0c8ff; }
+        .quiz-question:last-child { border-bottom: none; padding-bottom: 0; }
+        .quiz-question p { font-weight: 600; margin-bottom: 15px; text-align: left; }
+        .options { display: flex; flex-wrap: wrap; gap: 10px; }
+        .options button { background-color: #007bff; color: white; padding: 12px 20px; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; font-weight: 500; transition: background-color 0.3s ease, transform 0.2s ease; }
+        .options button:hover { background-color: #0056b3; transform: translateY(-2px); }
+        .feedback { margin-top: 15px; font-weight: bold; font-size: 0.95em; min-height: 1.5em; }
+        .feedback.correct { color: #28a745; }
+        .feedback.incorrect { color: #dc3545; }
+
+        /* ======================================== */
+        /* PIE DE PÁGINA */
+        /* ======================================== */
+        footer {
+            margin-top: auto;
+            background-color: #004085;
+            color: #eef2f7;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9em;
+            border-top: 3px solid #007bff;
+        }
+        footer p { margin-bottom: 10px; text-align: center; }
+        footer a { color: #a0c8ff; font-weight: 500; }
+        footer a:hover, footer a:focus { color: #ffffff; text-decoration: underline; }
+
+        /* ======================================== */
+        /* DISEÑO RESPONSIVO */
+        /* ======================================== */
+        @media (max-width: 992px) {
+            .main-container { width: 95%; padding: 25px 30px; }
+            h1 { font-size: 1.9em; }
+            h2 { font-size: 1.5em; }
+        }
+        @media (max-width: 768px) {
+            .main-container { width: 98%; margin: 15px auto; padding: 20px 20px; }
+            h1 { font-size: 1.7em; margin-bottom: 20px;}
+            h2 { font-size: 1.3em; margin-bottom: 15px; padding-bottom: 10px;}
+            .accordion-title { padding: 15px 20px; }
+            .quiz-section { padding: 20px; }
+            .options { flex-direction: column; gap: 8px; }
+            .options button { width: 100%; padding: 10px 15px; }
+            footer { padding: 20px 0; }
+        }
+
+        /* ESTILOS ESPECÍFICOS PARA IMÁGENES */
+        .image-container {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        /* ESTILOS PARA EL ENLACE DEL VIDEO */
+        .video-link-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f0f8ff; /* Azul muy claro para destacar el enlace */
+            border: 1px dashed #add8e6; /* Borde punteado azul */
+            border-radius: 8px;
+        }
+        .video-link-container p {
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #004085;
+        }
+        .video-link-container a {
+            font-size: 1.1em;
+            color: #0056b3;
+            text-decoration: underline;
+        }
+        .video-link-container a:hover, .video-link-container a:focus {
+            color: #003366;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="main-container">
+            <h1>Colocación de PICC: Método ZIM y Tunelización</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-container">
+
+            <section id="intro">
+                <h2>I- IMPORTANCIA DE LA ZONA DE INSERCIÓN: EL MÉTODO ZIM</h2>
+                <p>2 criterios a tener muy en cuenta: vena puncionada y punto de salida del catéter</p>
+                <p>El rendimiento de un Dispositivo de Acceso Vascular (DAV) se puede prever en base a 4 criterios:</p>
+                <ul>
+                    <li>Posición de la punta</li>
+                    <li>Técnica de inserción</li>
+                    <li>Vena canalizada</li>
+                    <li>Sitio de salida</li>
+                </ul>
+                <p>En general, el punto de punción para llegar a la vena es el mismo punto por donde luego sale el catéter. Pero hay que tener en cuenta que la vena ideal para a insertar el dispositivo tiene que responder a una serie de criterios (calibre, recorrido, ubicación en el brazo) para poder hacer que posteriormente, el catéter se pueda mantener en buenas condiciones. Sabemos que cuando no se reúne estos criterios incide directamente en el riesgo de trombosis.</p>
+                <p>Es donde la ecografía es clave: permite elegir el mejor tramo venoso, con el mayor calibre posible y posiblemente con recorrido lineal, así como una ubicación segura en cuanto a paquetes nerviosos y arterias.</p>
+                <p>Respecto a otras complicaciones como la incidencia de infecciones, tromboflebitis o complicaciones mecánicas, dependen principalmente del punto de salida.</p>
+                <p>En el 2011, preocupado por la tasa de trombosis que los PICCs demostraban tener en los años 2000, el experto en acceso vascular Robert Dawson propuso un nuevo método (1):</p>
+                <p>El método ZIM es un microsistema de procedimientos clínicos diseñado para utilizar ecografía y de esta manera tener en cuenta la anatomía y fisiología de la parte superior del brazo, y reducir los riesgos asociados con la inserción del PICC y su uso.</p>
+                <h3>¿En qué consiste el método ZIM?</h3>
+                <p>El método ZIM es el Método de Inserción por Zona: se mide el brazo desde el codo hasta la línea axilar. La distancia suele ser de 20-22cm (con un rango de 18-24cm) y se divide en 3 zonas:</p>
+                <ul>
+                    <li>El tercio proximal: zona amarilla cerca de la zona axilar</li>
+                    <li>El tercio mediano: zona verde</li>
+                    <li>El tercio distal: zona roja cerca de la flexura del brazo</li>
+                </ul>
+                <!-- **INSERCIÓN DE LA IMAGEN DE ZIM AQUÍ** -->
+                <div class="image-container">
+                    <img src="https://asenfovalle.cl/wp-content/uploads/2025/06/Agregar-un-subtitulo-89.png" alt="Diagrama de las zonas del método ZIM" title="Zonas del Método ZIM">
+                </div>
+                <!-- **FIN DE LA INSERCIÓN DE LA IMAGEN DE ZIM** -->
+
+                <h3>Rendimiento de cada zona del método ZIM</h3>
+                <h4>La zona roja</h4>
+                <p>No es una parte recomendada para la punción venosa ni tampoco para al punto de salida del catéter. Las venas son de pequeño calibre y los movimientos de los músculos hacen que el punto de salida es bastante inestable. Esta zona roja está relacionada con complicaciones claras en el momento de la inserción (fracaso de canalización, equimosis, etc…) y se debe evitar.</p>
+
+                <h4>La zona amarilla</h4>
+                <p>Es la parte más proximal y tiene una gran ventaja: en esta zona se sitúa el tramo braquial de la vena axilar que tiene un diámetro importante, puede alcanzar 6-8mm. Siempre respetando la regla "el catéter tiene que ocupar máximo un tercio de la luz de la vena", permite insertar catéteres de 6Fr o incluso más.</p>
+                <p>La contrapartida es que al estar situada muy cerca de la axila, un catéter insertado en esta zona presentará serios riesgos de complicaciones. Mantener una fijación y un apósito íntegros en esta zona se hace difícil debido a la sudoración, una piel más fina y los movimientos musculares.</p>
+
+                <h4>La zona verde</h4>
+                <p>Es la parte ideal para la venopunción, en particular la mitad proximal cuya anchura es de 3-4cm: en esta ubicación la vena braquial es de diámetro ancho, suficiente alejada del nervio mediano y de las arterias. Otros puntos a favor es que se encuentra por debajo de las fascias musculares, con lo cual el punto de salida es estable, y la zona cutánea se mantiene seca.</p>
+                <!-- **INSERCIÓN DE LA SEGUNDA IMAGEN AQUÍ** -->
+                <div class="image-container">
+                    <img src="https://asenfovalle.cl/wp-content/uploads/2025/07/Agregar-un-subtitulo-94.png" alt="Ilustración de la zona verde del método ZIM" title="Zona Verde del Método ZIM">
+                </div>
+                <!-- **FIN DE LA SEGUNDA IMAGEN** -->
+                <p>Sin embargo, como dicho anteriormente en ciertas ocasiones, no es posible proceder a la punción en la zona verde y/o la punción en zona amarilla supone más ventaja para el paciente.</p>
+                <p>En estos casos es clave poder recurrir a la tunelización.</p>
+
+
+                <h2>II- ¿EN QUÉ CONSISTE LA TUNELIZACIÓN?</h2>
+                <h3>Definición de la tunelización</h3>
+                <p>Es el hecho de crear un túnel subcutáneo desde el punto ideal de entrada en vena hasta la zona verde del método ZIM.</p>
+                <p>Es especialmente interesante para pacientes cuyo capital venoso en la zona verde está agotado o pacientes cuyas venas tienen un diámetro muy pequeño que no permiten la canalización del catéter del calibre deseado (recordemos aquí que para colocar un catéter de 3Fr se requiere una vena de 3mm).</p>
+                <h3>Técnica de tunelización</h3>
+                <p>La tunelización de un PICC se hace de la misma manera que durante la colocación de Hickman o reservorio: se pasa el catéter por debajo de la piel con un tunelizador o se puede hacer también con un catéter corto (14G) o una cánula pelable larga.</p>
+                <p>En lo que se refiere a los pasos, se pueden hacer de 2 formas:</p>
+                <h4>Tunelización anterógrada, con un PICC estándar es decir de corte distal (corte de la punta):</h4>
+                <ul>
+                    <li>Se canaliza la vena para dejar la guía dentro</li>
+                    <li>Se crea el túnel</li>
+                    <li>Se inserta el catéter desde el punto final es decir lo que será el punto de salida del catéter</li>
+                    <li>Se pasa el catéter en el túnel</li>
+                    <li>Se inserta en vena con el introductor MST</li>
+                </ul>
+                <h4>Tunelización retrograda, con un PICC de corte proximal:</h4>
+                <ul>
+                    <li>Se canaliza la vena y se inserta el catéter</li>
+                    <li>Se crea el túnel</li>
+                    <li>Corte proximal del catéter</li>
+                    <li>Se pasa el catéter en el túnel desde el punto de inserción hasta el punto de salida</li>
+                    <li>Se monta el prolongador definitivo</li>
+                </ul>
+                <h3>Ventajas adicionales de la tunelización</h3>
+                <p>La tunelización es un recurso muy útil para poder asegurar una colocación óptima y evitar posibles complicaciones.</p>
+                <p>Además, tiene 2 beneficios notables:</p>
+                <ol>
+                    <li>Reduce las infecciones porque:
+                        <ul>
+                            <li>Aleja la zona de entrada en piel de la entrada en vena lo cual reduce el riesgo de contaminación bacteriana (el tramo subcutáneo actúa como barrera)</li>
+                            <li>La punta de salida del catéter está en una zona favorable al buen mantenimiento del mismo (lejos de la zona axilar)</li>
+                        </ul>
+                    </li>
+                    <li>Reduce el riesgo de movimiento o retirada accidental:
+                        <p>La parte subcutánea permite una mejor fijación del catéter, característica especialmente importante en tratamiento de larga duración como es la nutrición parenteral o la quimioterapia.</p>
+                    </li>
+                </ol>
+                <p>Teniendo en cuanta todas las herramientas de las que dispone hoy en día el mundo del acceso vascular, tales como la ecografía, la técnica Microseldinger, el método ZIM y la tunelización, es importante recordar la conclusión a la que llegan Pittiruti y Scoppettuolo en el manual GAVeCeLT (2):</p>
+                <p>Tenemos entonces la responsabilidad ética de usar estas herramientas de la mejor manera posible, siempre teniendo en mente que cada paciente tiene el derecho al máximo confort y seguridad.</p>
+                <p>Ignorar estos recursos cuando están a disposición, es arriesgarse al fallo del acceso vascular con el impacto que pueda tener en la terapia intravenosa del paciente así como en su vida, tanto en el aspecto físico como emocional.</p>
+
+                <!-- **INSERCIÓN DEL VIDEO DE YOUTUBE AQUÍ** -->
+                <div class="video-container" style="text-align: center; margin: 30px 0; padding: 20px; background-color: #f0f8ff; border: 1px solid #add8e6; border-radius: 8px;">
+                    <h3 style="color: #004085; margin-bottom: 20px;">Video Demostrativo: Colocación de PICC</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/6ZS8cWHxziY" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            title="Video sobre colocación de PICC - Método ZIM y Tunelización">
+                        </iframe>
+                    </div>
+                </div>
+                <!-- **FIN DE LA INSERCIÓN DEL VIDEO** -->
+
+                <!-- Aquí iría el script del cuestionario -->
+                <section id="quiz-section" class="quiz-section">
+                    <h2>Pon a Prueba tus Conocimientos</h2>
+                    <div id="quiz">
+                        <div class="quiz-question">
+                            <p>1. El Método ZIM se enfoca principalmente en:</p>
+                            <div class="options">
+                                <button onclick="checkAnswer(1, 'a')" aria-label="Opción a: La longitud del catéter">a) La longitud del catéter</button>
+                                <button onclick="checkAnswer(1, 'b')" aria-label="Opción b: La técnica de sutura y curación">b) La técnica de sutura y curación</button>
+                                <button onclick="checkAnswer(1, 'c')" aria-label="Opción c: La inserción ecoguiada">c) La inserción ecoguiada</button>
+                            </div>
+                            <div id="feedback1" class="feedback" role="alert"></div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p>2. La tunelización ayuda a crear una barrera contra patógenos al:</p>
+                            <div class="options">
+                                <button onclick="checkAnswer(2, 'a')" aria-label="Opción a: Permitir la salida del catéter justo en el sitio de punción">a) Permitir la salida del catéter justo en el sitio de punción</button>
+                                <button onclick="checkAnswer(2, 'b')" aria-label="Opción b: Crear un túnel subcutáneo para el catéter">b) Crear un túnel subcutáneo para el catéter</button>
+                                <button onclick="checkAnswer(2, 'c')" aria-label="Opción c: Utilizar un apósito transparente de mayor tamaño">c) Utilizar un apósito transparente de mayor tamaño</button>
+                            </div>
+                            <div id="feedback2" class="feedback" role="alert"></div>
+                        </div>
+
+                        <div class="quiz-question">
+                            <p>3. ¿Cuál es un beneficio clave del método ZIM?</p>
+                            <div class="options">
+                                <button onclick="checkAnswer(3, 'a')" aria-label="Opción a: Aumenta la tensión en el sitio de inserción">a) Aumenta la tensión en el sitio de inserción</button>
+                                <button onclick="checkAnswer(3, 'b')" aria-label="Opción b: Reduce el riesgo de extracción accidental">b) Reduce el riesgo de extracción accidental</button>
+                                <button onclick="checkAnswer(3, 'c')" aria-label="Opción c: Dificulta la curación del sitio">c) Dificulta la curación del sitio</button>
+                            </div>
+                            <div id="feedback3" class="feedback" role="alert"></div>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="main-container">
+            <p>© 2023 Campus Vygon. Todos los derechos reservados.</p>
+            <p>Para más información, visita: <a href="https://campusvygon.com/es/colocacion-de-picc-el-metodo-zim-y-la-tunelizacion-2-recursos-claves-para-asegurar-su-exito/" target="_blank" rel="noopener noreferrer">Campus Vygon - Colocación de PICC</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // ========================================
+        // SCRIPT PARA LA INTERACTIVIDAD DE LOS ACORDEONES
+        // ========================================
+        document.querySelectorAll('.accordion-item').forEach(item => {
+            const title = item.querySelector('.accordion-title');
+            const content = item.querySelector('.accordion-content');
+
+            title.addEventListener('click', () => {
+                const isExpanded = item.classList.contains('active');
+
+                document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        otherItem.querySelector('.accordion-title').setAttribute('aria-expanded', 'false');
+                    }
+                });
+
+                item.classList.toggle('active');
+                if (item.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    title.setAttribute('aria-expanded', 'true');
+                } else {
+                    content.style.maxHeight = null;
+                    title.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        // ========================================
+        // SCRIPT PARA EL CUESTIONARIO INTERACTIVO
+        // ========================================
+        const correctAnswers = {
+            1: 'b',
+            2: 'b',
+            3: 'b'
+        };
+
+        function checkAnswer(questionNum, selectedAnswer) {
+            const feedbackElement = document.getElementById(`feedback${questionNum}`);
+            const correctAnswer = correctAnswers[questionNum];
+
+            feedbackElement.className = 'feedback';
+            feedbackElement.textContent = '';
+
+            if (selectedAnswer === correctAnswer) {
+                feedbackElement.classList.add('correct');
+                feedbackElement.textContent = '¡Correcto!';
+            } else {
+                feedbackElement.classList.add('incorrect');
+                feedbackElement.textContent = 'Inténtalo de nuevo.';
+            }
+        }
+    </script>
+
+    <!-- **BIBLIOGRAFÍA COLOCADA DESPUÉS DEL SCRIPT PRINCIPAL** -->
+    <div class="main-container">
+        <section id="bibliography">
+            <h3>Bibliografía</h3>
+            <ul style="list-style-type: disc; padding-left: 20px; margin-top: 5px;">
+                <li>Robert Dawson PICC Zone Insertion MethodTM (ZIMTM): A Systematic Approach to Determine the Ideal Insertion Site for PICCs in the Upper Arm, JAVA Vol 16 No 3 – 2011</li>
+                <li>Pittiruti y Scoppettuolo, Manual GAVeCeLT sobre PICC y midline – 2016</li>
+                <li>Guías INS 2021</li>
+            </ul>
+        </section>
+    </div>
+    <!-- **FIN DE LA BIBLIOGRAFÍA** -->
+
+</body>
+</html>
